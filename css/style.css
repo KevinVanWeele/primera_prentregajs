@@ -1,0 +1,42 @@
+.img-fluidar{width:200px;height: auto}
+.ropas{display: flex; flex-direction: column;align-items: center; justify-content: center;}
+.botones{display: flex; flex-direction: column;align-items: center; justify-content: center;}
+.m10{margin:20px}
+
+@media (min-width: 1024px) {
+    .gridindex {
+      display: grid;
+      grid-template-columns: 100%;
+      grid-template-rows: auto auto auto;
+    }
+    .ropa {
+        display: grid;
+        grid-template-areas:
+        "titulo titulo titulo tiulo"
+        "chaleco remera buso campera"
+        "botonuno botondos botontres botoncuatro"
+        "carritobt carritobt carritobt carritobt"
+        ;
+        grid-template-columns: 25% 25% 25% 25%;
+        grid-template-rows: auto auto auto;
+      }
+      .titulo{grid-area:titulo;}
+      .chaleco{grid-area:chaleco;}
+      .remera{grid-area:remera;}
+      .buso{grid-area:buso;}
+      .campera{grid-area:campera;}
+      .botonuno{grid-area: botonuno;}
+      .botondos{grid-area: botondos;}
+      .botontres{grid-area: botontres;}
+      .botoncuatro{grid-area: botoncuatro;}
+      .carritobt{grid-area:carritobt;}
+      .align-items-center {
+        align-items: center;
+      }
+
+
+
+
+
+
+}
