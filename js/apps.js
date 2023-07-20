@@ -24,7 +24,6 @@ async function apiProductosPorCategoria(categoria = categoriaSeleccionada) {
   );
   const api = await response.json();
   const productosMercadoLibre = api.results;
-
   for (const productoMercadoLibre of productosMercadoLibre) {
     productos.push(
       new Producto(
@@ -69,6 +68,7 @@ async function apiProductosPorNombre(nombre) {
   Swal.close();
 }
 
+
 const divProductos = document.querySelector("#productos");
 const divCarrito = document.querySelector("#carrito");
 const spanCantidadProductos = document.querySelector("#cantidadProductos");
@@ -87,6 +87,7 @@ apiProductosPorCategoria().then((productos) => {
 });
 
 apiProductosPorCategoria();
+
 
 function mostrarLoading() {
   Swal.fire({
@@ -118,48 +119,6 @@ botonesCategorias.forEach((boton) => {
     apiProductosPorCategoria();
   });
 });
-
-
-function cargarProductos(productos) {
-  divProductos.innerHTML = "";
-
-  for (const producto of productos) {
-
-    divProductos.innerHTML += `
-        <div class="producto">
-            <h2>${producto.nombre}</h2>
-            <p class="precio">$${producto.precio}</p>
-            <div class="imagen">
-              <img src="https://http2.mlstatic.com/D_604790-${producto.imagen}-V.webp" />
-            </div>
-            <a href="#" class="btn btnAgregar" data-id="${producto.id}">Agregar al carrito</a>
-        </div>
-    `;
-  }
-
-  const botonesAgregar = document.querySelectorAll(".btnAgregar");
-  for (const boton of botonesAgregar) {
-
-    boton.addEventListener("click", (event) => {
-      event.preventDefault();
-
-      const id = boton.dataset.id;
-      console.log(id);
-
-      const producto = registroPorId(id);
-
-      console.agregar(producto);
-    });
-  }
-}
-
-function quitarClase() {
-  const botonSeleccionado = document.querySelector(".seleccionado");
-  if (botonSeleccionado) {
-    botonSeleccionado.classList.remove("seleccionado");
-  }
-}
-
 class Carrito {
   constructor() {
 
@@ -301,3 +260,42 @@ botonComprar.addEventListener("click", (event) => {
 
 const carrito = new Carrito();
 
+function cargarProductos(productos) {
+  divProductos.innerHTML = "";
+
+  for (const producto of productos) {
+
+    divProductos.innerHTML += `
+        <div class="producto">
+            <h2>${producto.nombre}</h2>
+            <p class="precio">$${producto.precio}</p>
+            <div class="imagen">
+              <img src="https://http2.mlstatic.com/D_604790-${producto.imagen}-V.webp" />
+            </div>
+            <a href="#" class="btn btnAgregar" data-id="${producto.id}">Agregar al carrito</a>
+        </div>
+    `;
+  }
+
+  const botonesAgregar = document.querySelectorAll(".btnAgregar");
+  for (const boton of botonesAgregar) {
+
+    boton.addEventListener("click", (event) => {
+      event.preventDefault();
+
+      const id = boton.dataset.id;
+      console.log(id);
+
+      const producto = registroPorId(id);
+
+      carrito.agregar(producto);
+    });
+  }
+}
+
+function quitarClase() {
+  const botonSeleccionado = document.querySelector(".seleccionado");
+  if (botonSeleccionado) {
+    botonSeleccionado.classList.remove("seleccionado");
+  }
+}
